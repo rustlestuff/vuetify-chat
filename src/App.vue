@@ -1,56 +1,49 @@
 <template>
-  <v-app>
-    <v-app-bar app color="primary" dark>
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
+  <v-app id="inspire">
+    <v-navigation-drawer v-model="drawer" app>
+      <v-list dense>
+        <v-list-item link :to="{ name: 'Home' }" exact>
+          <v-list-item-action>
+            <v-icon>mdi-home</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Home</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item link :to="{ name: 'Conversations' }">
+          <v-list-item-action>
+            <v-icon>mdi-message</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Conversations</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
 
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
-
-      <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
+    <v-app-bar app color="teal" dark>
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-toolbar-title>Vuetify Chat</v-toolbar-title>
     </v-app-bar>
 
-    <v-main>
-      <HelloWorld />
-    </v-main>
+    <v-container class="fill-height" fluid>
+      <v-row align="center" justify="center">
+        <router-view />
+      </v-row>
+    </v-container>
+
+    <v-footer color="teal" app inset>
+      <span class="white--text">&copy; {{ new Date().getFullYear() }}</span>
+    </v-footer>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld";
-
+// https://vuejsdevelopers.com/2017/10/16/vue-js-firestore/
 export default {
   name: "App",
-
-  components: {
-    HelloWorld
-  },
-
   data: () => ({
-    //
+    drawer: null
   })
 };
 </script>
